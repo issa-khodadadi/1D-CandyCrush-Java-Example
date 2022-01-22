@@ -4,6 +4,7 @@ project to provide 1D candy crush game, to crush groups of 3 or more candies!
 for example for the inptus :
 
 1- ABCCCB
+
 2- ABBCCCBA
 3- ABCBBAACCCCAAB
 4- ABCCBBAAABCCCCAABB
