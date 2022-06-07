@@ -8,10 +8,45 @@ public class CandyCrush {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter your pattern: ");
-        String candyBoard = scanner.nextLine();
-
-        System.out.println("crushed pattern is: " + process(candyBoard));
+        while (true) {
+            System.out.println("please enter your candies:");
+            System.out.println(
+                    doCandyCrushOneD(
+                            scanner.nextLine())
+            );
+            //System.out.println(process(input));
+        }
+    }
+    
+    static String doCandyCrushOneD(String input) {
+        Map<Character, String> candyItems = new HashMap<>();
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            if (i != 0) {
+                if (candyItems.get(currentChar) == null) {
+                    candyItems = new HashMap<>();
+                    candyItems.put(currentChar, String.valueOf(currentChar));
+                } else {
+                    if (candyItems.get(currentChar).length() >= 2) {
+                        if (i == input.length() - 1 || currentChar != input.charAt(i + 1)) {
+                            input = input.replaceFirst (
+                                    candyItems.get(
+                                            currentChar) + currentChar, "");
+                            return doCandyCrushOneD(input);
+                        } else {
+                            candyItems.put(currentChar,
+                                    candyItems.get(currentChar) + currentChar);
+                        }
+                    } else {
+                        candyItems.put(currentChar,
+                                candyItems.get(currentChar) + currentChar);
+                    }
+                }
+            } else {
+                candyItems.put(currentChar, String.valueOf(currentChar));
+            }
+        }
+        return input;
     }
 
     public static String process(String candyBoard) {
